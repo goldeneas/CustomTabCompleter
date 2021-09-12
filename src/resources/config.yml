@@ -1,0 +1,17 @@
+#-------------#
+# Permissions #
+#-------------#
+bypass_tab_filtering_permission: "tabcompleter.bypass"
+
+#----------#
+# Settings #
+#----------#
+# Set to true to switch the blacklist to a whitelist
+whitelist_instead_of_blacklist: false
+# These commands will be removed from the autocomplete list.
+# If "whitelist_instead_of_blacklist" is set to true, only these commands will show.
+blacklisted_commands:
+  - "plugins"
+  - "pl"
+  - "help"
+  - "icanhasbukkit"

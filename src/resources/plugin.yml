@@ -1,0 +1,4 @@
+main: com.xgolden.tabcompleter.Main
+name: CustomTabCompleter
+version: '1.0'
+author: xGolden_
