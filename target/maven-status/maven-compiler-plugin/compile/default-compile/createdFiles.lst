@@ -1,2 +1,7 @@
 com\xgolden\tabcompleter\events\CommandSendEvent.class
+com\xgolden\tabcompleter\utils\ChatUtil.class
+com\xgolden\tabcompleter\events\CommandEvent.class
+com\xgolden\tabcompleter\components\TextComponent.class
+com\xgolden\tabcompleter\events\TabCompleterEvent.class
+com\xgolden\tabcompleter\utils\ConfigUtil.class
 com\xgolden\tabcompleter\Main.class
