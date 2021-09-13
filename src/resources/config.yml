@@ -1,26 +1,13 @@
-#-------------#
-# Permissions #
-#-------------#
 permission_bypass_tab_filtering: "tabcompleter.bypass"
 permission_reload_config: "tabcompleter.reload"
 
-#----------#
-# Settings #
-#----------#
-# Set to true to switch the blacklist to a whitelist
+automatically_remove_no_permission_commands: true
 whitelist_instead_of_blacklist: false
-# These commands will be removed from the autocomplete list.
-# If "whitelist_instead_of_blacklist" is set to true, only these commands will show.
 blacklisted_commands:
   - "icanhasbukkit"
   - "plugins"
   - "pl"
 
-#----------#
-# Feedback #
-#----------#
-# These strings are used as feedback for your players when they use this plugin's commands.
-# You can use the "&" symbol followed by color codes.
 prefix: "&6TabCompleter »&7"
 not_enough_permissions: "You don't have enough permissions to use this command!"
 not_enough_arguments: "Not enough arguments."

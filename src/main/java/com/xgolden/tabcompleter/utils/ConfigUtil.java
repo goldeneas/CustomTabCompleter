@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 public class ConfigUtil {
     
     // Settings
+    public static boolean shouldAutomaticallyRemoveCommands;
     public static boolean isListWhitelist;
     public static List<String> commandsList;
 
@@ -35,6 +36,7 @@ public class ConfigUtil {
         File file = new File(Main.getInstance().getDataFolder().getAbsolutePath() + "/config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
+        shouldAutomaticallyRemoveCommands = config.getBoolean("automatically_remove_no_permission_commands");
         isListWhitelist = config.getBoolean("whitelist_instead_of_blacklist");
         commandsList = config.getStringList("blacklisted_commands");
 

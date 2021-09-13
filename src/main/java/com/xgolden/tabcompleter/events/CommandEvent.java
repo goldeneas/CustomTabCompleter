@@ -16,6 +16,8 @@ public class CommandEvent implements CommandExecutor {
         if(!(sender instanceof Player)) {
             // We cannot use ChatUtil because we have to prevent a cast to player for the ConsoleSender.
             // It would otherwise result in an error in console.
+
+            // TODO: Implement usage from console.
             sender.sendMessage(ConfigUtil.NO_CONSOLE_USAGE.getString());
             return true;
         }
