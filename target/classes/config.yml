@@ -1,6 +1,7 @@
 permission_bypass_tab_filtering: "tabcompleter.bypass"
 permission_reload_config: "tabcompleter.reload"
 
+fake_no_permission_when_using_blacklisted_command: true
 automatically_remove_no_permission_commands: true
 whitelist_instead_of_blacklist: false
 blacklisted_commands:
@@ -9,8 +10,9 @@ blacklisted_commands:
   - "pl"
 
 prefix: "&6TabCompleter »&7"
+fake_no_permission_message: "Unknown command. Type \"/help\" for help."
 not_enough_permissions: "You don't have enough permissions to use this command!"
 not_enough_arguments: "Not enough arguments."
-unknown_command_argument: "Unknown argument, please try again."
 no_usage_from_console: "You cannot use this command from console!"
-successfully_reloaded_config: "The configuration has been reloaded."
+unknown_command_argument: "Unknown argument, please try again."
+successfully_reloaded_config: "The configuration has been reloaded. Some changes require a relog by the user to be affected."

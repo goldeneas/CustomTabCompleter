@@ -13,6 +13,7 @@ public class ConfigUtil {
     
     // Settings
     public static boolean shouldAutomaticallyRemoveCommands;
+    public static boolean shouldFakeNoPermission;
     public static boolean isListWhitelist;
     public static List<String> commandsList;
 
@@ -22,8 +23,9 @@ public class ConfigUtil {
 
     // Feedback
     public static String PREFIX;
-    public static TextComponent NOT_ENOUGH_ARGUMENTS;
+    public static TextComponent FAKE_NO_PERMISSION;
     public static TextComponent NOT_ENOUGH_PERMISSIONS;
+    public static TextComponent NOT_ENOUGH_ARGUMENTS;
     public static TextComponent UNKNOWN_ARGUMENT;
     public static TextComponent NO_CONSOLE_USAGE;
     public static TextComponent RELOADED_CONFIG;
@@ -37,6 +39,7 @@ public class ConfigUtil {
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
         shouldAutomaticallyRemoveCommands = config.getBoolean("automatically_remove_no_permission_commands");
+        shouldFakeNoPermission = config.getBoolean("fake_no_permission_when_using_blacklisted_command");
         isListWhitelist = config.getBoolean("whitelist_instead_of_blacklist");
         commandsList = config.getStringList("blacklisted_commands");
 
@@ -44,6 +47,7 @@ public class ConfigUtil {
         reloadPermission = config.getString("permission_reload_config");
 
         PREFIX = config.getString("prefix");
+        FAKE_NO_PERMISSION = new TextComponent(config.getString("fake_no_permission_message"));
         NOT_ENOUGH_ARGUMENTS = new TextComponent(config.getString("not_enough_arguments"));
         NOT_ENOUGH_PERMISSIONS = new TextComponent(config.getString("not_enough_permissions"));
         UNKNOWN_ARGUMENT = new TextComponent(config.getString("unknown_command_argument"));

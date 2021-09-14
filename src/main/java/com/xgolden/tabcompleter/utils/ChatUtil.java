@@ -10,7 +10,7 @@ import static org.bukkit.ChatColor.translateAlternateColorCodes;
 
 public class ChatUtil {
 
-    public static void sendMessage(Player player, TextComponent component) {
+    public static void sendMessage(CommandSender sender, TextComponent component) {
         // Translate common symbol (&) to the one that's used by Spigot (§).
         String translatedMessage = translateAlternateColorCodes('&', component.getString());
         String translatedPrefix = translateAlternateColorCodes('&', ConfigUtil.PREFIX);
@@ -20,19 +20,19 @@ public class ChatUtil {
         cc.append(translatedMessage);
 
         // Send message.
-        player.sendMessage(cc.getString());
+        sender.sendMessage(cc.getString());
+    }
+
+    public static void sendMessage(CommandSender sender, String message) {
+        sendMessage(sender, message);
     }
 
     public static void sendMessage(Player player, String message) {
         sendMessage(player, new TextComponent(message));
     }
 
-    public static void sendMessage(CommandSender sender, String message) {
-        sendMessage((Player) sender, message);
-    }
-
-    public static void sendMessage(CommandSender sender, TextComponent component) {
-        sendMessage((Player) sender, component);
+    public static void sendMessage(Player sender, TextComponent component) {
+        sendMessage(sender, component);
     }
 
     public static void sendMessage(String username, String message) {
