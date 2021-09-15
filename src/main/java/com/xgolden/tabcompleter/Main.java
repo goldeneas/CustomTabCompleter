@@ -3,6 +3,7 @@ package com.xgolden.tabcompleter;
 import com.xgolden.tabcompleter.events.CommandEvent;
 import com.xgolden.tabcompleter.events.CommandPreProcessEvent;
 import com.xgolden.tabcompleter.events.CommandSendEvent;
+import com.xgolden.tabcompleter.events.PlayerConnectEvent;
 import com.xgolden.tabcompleter.events.TabCompleterEvent;
 import com.xgolden.tabcompleter.utils.UpdateUtil;
 
@@ -27,6 +28,7 @@ public class Main extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new CommandSendEvent(), this);
         this.getServer().getPluginManager().registerEvents(new CommandPreProcessEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerConnectEvent(), this);
 
         this.saveDefaultConfig();
         

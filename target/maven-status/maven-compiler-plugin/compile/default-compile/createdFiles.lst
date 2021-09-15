@@ -4,6 +4,7 @@ com\xgolden\tabcompleter\events\CommandEvent.class
 com\xgolden\tabcompleter\components\TextComponent.class
 com\xgolden\tabcompleter\events\TabCompleterEvent.class
 com\xgolden\tabcompleter\utils\ConfigUtil.class
+com\xgolden\tabcompleter\events\PlayerConnectEvent.class
 com\xgolden\tabcompleter\utils\UpdateUtil.class
 com\xgolden\tabcompleter\Main.class
 com\xgolden\tabcompleter\events\CommandPreProcessEvent.class

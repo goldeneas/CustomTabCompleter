@@ -1,5 +1,6 @@
 permission_bypass_tab_filtering: "tabcompleter.bypass"
 permission_reload_config: "tabcompleter.reload"
+permission_admin: "tabcompleter.admin"
 
 fake_no_permission_when_using_blacklisted_command: true
 automatically_remove_no_permission_commands: true
@@ -10,6 +11,7 @@ blacklisted_commands:
   - "pl"
 
 prefix: "&6TabCompleter »&7"
+update_is_available: "A new update is available! Please download it from our spigot page."
 fake_no_permission_message: "Unknown command. Type \"/help\" for help."
 not_enough_permissions: "You don't have enough permissions to use this command!"
 not_enough_arguments: "Not enough arguments."

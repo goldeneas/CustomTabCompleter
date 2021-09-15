@@ -6,7 +6,7 @@
 
   <groupId>com.xgolden.tabcompleter</groupId>
   <artifactId>CustomTabCompleter</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.3.1</version>
 
   <name>tab-completer</name>
   <!-- FIXME change it to the project's website -->

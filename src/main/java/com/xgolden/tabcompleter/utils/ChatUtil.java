@@ -28,19 +28,19 @@ public class ChatUtil {
     }
 
     public static void sendMessage(Player player, String message) {
-        sendMessage(player, new TextComponent(message));
+        sendMessage((CommandSender) player, new TextComponent(message));
     }
 
     public static void sendMessage(Player sender, TextComponent component) {
-        sendMessage(sender, component);
+        sendMessage((CommandSender) sender, component);
     }
 
     public static void sendMessage(String username, String message) {
-        sendMessage(Bukkit.getPlayer(username), message);
+        sendMessage((CommandSender) Bukkit.getPlayer(username), message);
     }
 
     public static void sendMessage(String username, TextComponent component) {
-        sendMessage(Bukkit.getPlayer(username), component);
+        sendMessage((CommandSender) Bukkit.getPlayer(username), component);
     }
     
 }
