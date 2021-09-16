@@ -5,6 +5,7 @@ import com.xgolden.tabcompleter.events.CommandPreProcessEvent;
 import com.xgolden.tabcompleter.events.CommandSendEvent;
 import com.xgolden.tabcompleter.events.PlayerConnectEvent;
 import com.xgolden.tabcompleter.events.TabCompleterEvent;
+import com.xgolden.tabcompleter.utils.GroupsUtil;
 import com.xgolden.tabcompleter.utils.UpdateUtil;
 
 import org.bstats.bukkit.Metrics;

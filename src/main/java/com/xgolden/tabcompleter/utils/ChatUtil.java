@@ -24,7 +24,7 @@ public class ChatUtil {
     }
 
     public static void sendMessage(CommandSender sender, String message) {
-        sendMessage(sender, message);
+        sendMessage(sender, new TextComponent(message));
     }
 
     public static void sendMessage(Player player, String message) {

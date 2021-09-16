@@ -1,0 +1,9 @@
+groups:
+  permission_group_one:
+    is_list_whitelist: false
+    commands:
+    - icanhasbukkit
+    - plugins
+    - pl
+    - bukkit:?
+    - bukkit:help

@@ -1,9 +1,8 @@
 package com.xgolden.tabcompleter.events;
 
-import java.util.List;
-
 import com.xgolden.tabcompleter.utils.ChatUtil;
 import com.xgolden.tabcompleter.utils.ConfigUtil;
+import com.xgolden.tabcompleter.utils.GroupsUtil;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,36 +29,84 @@ public class CommandEvent implements CommandExecutor {
                 ChatUtil.sendMessage(sender, ConfigUtil.RELOADED_CONFIG);
                 ConfigUtil.reloadConfig();
                 break;
-            
+
+            case "create":
+                if (args.length < 2) {
+                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
+                    return true;
+                }
+
+                // We avoid using dots since they will cause another section in the yml file to
+                // be created.
+                // tabcompleter.helper will create a tabcompleter section and under it an helper
+                // one.
+                GroupsUtil.createGroupWithPermission(args[1].replace('.', '_'));
+                ChatUtil.sendMessage(sender,
+                        "Successfully created group with permission: " + args[1].replace('.', '_'));
+                break;
+
+            case "delete":
+                if (args.length < 2) {
+                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
+                    return true;
+                }
+
+                GroupsUtil.deleteGroupWithPermission(args[1].replace('.', '_'));
+                ChatUtil.sendMessage(sender,
+                        "Successfully deleted group with permission: " + args[1].replace('.', '_'));
+                break;
+
             case "add":
-                if (args.length < 2) {
+                if (args.length < 3) {
                     ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
                     return true;
                 }
 
-                // Get current command list and add the new command
-                // then set it as the new list in config.
-                List<String> _currentAddList = ConfigUtil.commandsList;
-                _currentAddList.add(args[1]);
-                ConfigUtil.set("blacklisted_commands", _currentAddList);
-
-                ChatUtil.sendMessage(sender, ConfigUtil.ADDED_COMMAND);
+                // args[1] is the command.
+                // args[2] is the group being targeted.
+                GroupsUtil.addCommandToGroup(args[1], args[2]);
                 break;
-            
+
             case "remove":
-                if (args.length < 2) {
+                if (args.length < 3) {
                     ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
                     return true;
                 }
 
-                // Get current command list and remove the specified command
-                // then set it as the new list in config.
-                List<String> _currentRemoveList = ConfigUtil.commandsList;
-                _currentRemoveList.remove(args[1]);
-                ConfigUtil.set("blacklisted_commands", _currentRemoveList);
-
-                ChatUtil.sendMessage(sender, ConfigUtil.REMOVED_COMMAND);
+                // args[1] is the command.
+                // args[2] is the group being targeted.
+                GroupsUtil.removeCommandFromGroup(args[1], args[2]);
                 break;
+
+            // case "add":
+            // if (args.length < 2) {
+            // ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
+            // return true;
+            // }
+
+            // // Get current command list and add the new command
+            // // then set it as the new list in config.
+            // List<String> _currentAddList = ConfigUtil.commandsList;
+            // _currentAddList.add(args[1]);
+            // ConfigUtil.set("blacklisted_commands", _currentAddList);
+
+            // ChatUtil.sendMessage(sender, ConfigUtil.ADDED_COMMAND);
+            // break;
+
+            // case "remove":
+            // if (args.length < 2) {
+            // ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
+            // return true;
+            // }
+
+            // // Get current command list and remove the specified command
+            // // then set it as the new list in config.
+            // List<String> _currentRemoveList = ConfigUtil.commandsList;
+            // _currentRemoveList.remove(args[1]);
+            // ConfigUtil.set("blacklisted_commands", _currentRemoveList);
+
+            // ChatUtil.sendMessage(sender, ConfigUtil.REMOVED_COMMAND);
+            // break;
 
             default:
                 ChatUtil.sendMessage(sender, ConfigUtil.UNKNOWN_ARGUMENT);
