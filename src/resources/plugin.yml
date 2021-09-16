@@ -1,6 +1,6 @@
 main: com.xgolden.tabcompleter.Main
 name: CustomTabCompleter
-version: '1.0.3.1'
+version: '1.0.4'
 author: xGolden_
 commands:
    tabcompleter:

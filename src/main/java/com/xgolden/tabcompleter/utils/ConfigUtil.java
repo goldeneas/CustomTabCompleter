@@ -31,6 +31,8 @@ public class ConfigUtil {
     public static TextComponent UNKNOWN_ARGUMENT;
     public static TextComponent NO_CONSOLE_USAGE;
     public static TextComponent RELOADED_CONFIG;
+    public static TextComponent ADDED_COMMAND;
+    public static TextComponent REMOVED_COMMAND;
 
     static {
         reloadConfig();
@@ -57,6 +59,14 @@ public class ConfigUtil {
         UNKNOWN_ARGUMENT = new TextComponent(config.getString("unknown_command_argument"));
         NO_CONSOLE_USAGE = new TextComponent(config.getString("no_usage_from_console"));
         RELOADED_CONFIG = new TextComponent(config.getString("successfully_reloaded_config"));
+        ADDED_COMMAND = new TextComponent(config.getString("succesfully_added_command_to_list"));
+        REMOVED_COMMAND = new TextComponent(config.getString("succesfully_removed_command_to_list"));
+    }
+
+    public static void set(String path, Object value) {
+        Main plugin = Main.getInstance();
+        plugin.getConfig().set(path, value);
+        plugin.saveConfig();
     }
 
 }

@@ -1,6 +1,5 @@
 package com.xgolden.tabcompleter.events;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,16 +12,20 @@ public class TabCompleterEvent implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
 
-        List<String> firstArgumentList = Arrays.asList("reload");
-        ArrayList<String> finalList = new ArrayList<>();
+        List<String> firstArgumentList = Arrays.asList("reload", "add", "remove");
+        List<String> commandManagementList = Arrays.asList("<command>");
 
-        for(String s : firstArgumentList) {
-            if(s.startsWith(args[0])) {
-                finalList.add(s);
-            }
+        switch(args[0]) {
+            case "":
+                return firstArgumentList;
+
+            case "add":
+            case "remove":
+                return commandManagementList;
+                
+            default:
+                return null;
         }
-
-        return finalList;
     }
 
 }
