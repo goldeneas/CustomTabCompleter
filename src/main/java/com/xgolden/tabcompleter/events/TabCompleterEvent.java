@@ -12,12 +12,17 @@ public class TabCompleterEvent implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
 
-        List<String> firstArgumentList = Arrays.asList("reload", "add", "remove");
-        List<String> commandManagementList = Arrays.asList("<command>");
+        List<String> firstArgumentList = Arrays.asList("reload", "create", "delete", "add", "remove");
+        List<String> commandCreationList = Arrays.asList("<group>");
+        List<String> commandManagementList = Arrays.asList("<command> <group>");
 
         switch(args[0]) {
             case "":
                 return firstArgumentList;
+
+            case "create":
+            case "delete":
+                return commandCreationList;
 
             case "add":
             case "remove":

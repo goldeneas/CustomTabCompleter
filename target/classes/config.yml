@@ -4,22 +4,14 @@ permission_admin: "tabcompleter.admin"
 
 fake_no_permission_when_using_blacklisted_command: true
 automatically_remove_no_permission_commands: true
-whitelist_instead_of_blacklist: false
-blacklisted_commands:
-  - "icanhasbukkit"
-  - "plugins"
-  - "pl"
-  - "bukkit:?"
-  - "bukkit:pl"
-  - "bukkit:plugins"
 
 prefix: "&6TabCompleter »&7"
-update_is_available: "A new update is available! Please download it from our spigot page."
+update_is_available: "A new update is available! Please download it on spigot."
 fake_no_permission_message: "Unknown command. Type \"/help\" for help."
 not_enough_permissions: "You don't have enough permissions to use this command!"
 not_enough_arguments: "Not enough arguments."
 no_usage_from_console: "You cannot use this command from console!"
 unknown_command_argument: "Unknown argument, please try again."
-successfully_reloaded_config: "The configuration has been reloaded. Some changes require a relog by the user to be affected."
+successfully_reloaded_config: "The configuration has been reloaded."
 succesfully_added_command_to_list: "Your command has been successfully added."
 succesfully_removed_command_to_list: "Your command has been successfully removed."

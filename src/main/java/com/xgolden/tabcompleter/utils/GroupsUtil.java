@@ -10,12 +10,11 @@ public class GroupsUtil extends CustomConfig {
 
     private static final String GROUPS_ROOT_PATH = "groups";
 
-    private static FileConfiguration config;
+    private static FileConfiguration config = getCustomConfig("groups.yml");
 
-    static {
-        config = getCustomConfig("groups.yml");
-        saveConfig();
-    }
+    // static {
+    //     saveConfig();
+    // }
 
     public static void createGroupWithPermission(String permission) {
         config.set(GROUPS_ROOT_PATH +"."+ permission +"."+ "is_list_whitelist", false);
