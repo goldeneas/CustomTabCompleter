@@ -38,7 +38,7 @@ public class CommandEvent implements CommandExecutor {
 
                 // We avoid using dots since they will cause another section in the yml file to
                 // be created.
-                // tabcompleter.helper will create a tabcompleter section and under it an helper
+                // tabcompleter.helper would create a tabcompleter section and under it an helper
                 // one.
                 GroupsUtil.createGroupWithPermission(args[1].replace('.', '_'));
                 ChatUtil.sendMessage(sender,

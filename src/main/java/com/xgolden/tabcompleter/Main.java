@@ -12,6 +12,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
+    //TODO: Permission value in group config
+    //TODO: Add permission check for commands
+    //TODO: Add help menu (?)
+
     private static Main _instance;
 
     @Override
