@@ -15,12 +15,13 @@ public class CommandPreProcessEvent implements Listener {
     @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        if (!ConfigUtil.shouldFakeNoPermission || player.hasPermission(ConfigUtil.bypassPermission)) {
+        if (!ConfigUtil.shouldFakeNoPermission || player.hasPermission(ConfigUtil.BYPASS_PERMISSION)) {
             return;
         }
 
         // We need to use substring to remove the forward slash from the command.
-        String commandName = event.getMessage().substring(1);
+        String eventMessage = event.getMessage();
+        String commandName = eventMessage.substring(1, eventMessage.indexOf(" "));
 
         for (String groupPermission : GroupsUtil.getGroups()) {
             if (player.hasPermission(groupPermission)) {

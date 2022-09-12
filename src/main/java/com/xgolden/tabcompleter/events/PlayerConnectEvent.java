@@ -14,7 +14,7 @@ public class PlayerConnectEvent implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if(!player.hasPermission(ConfigUtil.adminPermission) || !UpdateUtil.isUpdateAvailable) { return; }
+        if(!player.hasPermission(ConfigUtil.ADMIN_PERMISSION) || !UpdateUtil.isUpdateAvailable) { return; }
 
         ChatUtil.sendMessage(player, ConfigUtil.UPDATE_AVAILABLE);
     }

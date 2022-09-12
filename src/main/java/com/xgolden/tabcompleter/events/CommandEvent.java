@@ -21,7 +21,7 @@ public class CommandEvent implements CommandExecutor {
         switch (args[0]) {
 
             case "reload":
-                if (!sender.hasPermission(ConfigUtil.reloadPermission)) {
+                if (!sender.hasPermission(ConfigUtil.ADMIN_PERMISSION)) {
                     ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_PERMISSIONS);
                     return true;
                 }
@@ -31,6 +31,11 @@ public class CommandEvent implements CommandExecutor {
                 break;
 
             case "create":
+                if (!sender.hasPermission(ConfigUtil.ADMIN_PERMISSION)) {
+                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_PERMISSIONS);
+                    return true;
+                }
+
                 if (args.length < 2) {
                     ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
                     return true;
@@ -46,6 +51,11 @@ public class CommandEvent implements CommandExecutor {
                 break;
 
             case "delete":
+                if (!sender.hasPermission(ConfigUtil.ADMIN_PERMISSION)) {
+                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_PERMISSIONS);
+                    return true;
+                }
+
                 if (args.length < 2) {
                     ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
                     return true;
@@ -57,6 +67,11 @@ public class CommandEvent implements CommandExecutor {
                 break;
 
             case "add":
+                if (!sender.hasPermission(ConfigUtil.ADMIN_PERMISSION)) {
+                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_PERMISSIONS);
+                    return true;
+                }
+
                 if (args.length < 3) {
                     ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
                     return true;
@@ -68,6 +83,11 @@ public class CommandEvent implements CommandExecutor {
                 break;
 
             case "remove":
+                if (!sender.hasPermission(ConfigUtil.ADMIN_PERMISSION)) {
+                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_PERMISSIONS);
+                    return true;
+                }
+
                 if (args.length < 3) {
                     ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
                     return true;

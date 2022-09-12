@@ -15,9 +15,8 @@ public class ConfigUtil {
     public static boolean shouldFakeNoPermission;
 
     // Permissions
-    public static String bypassPermission;
-    public static String reloadPermission;
-    public static String adminPermission;
+    public static String BYPASS_PERMISSION;
+    public static String ADMIN_PERMISSION;
 
     // Feedback
     public static String PREFIX;
@@ -42,9 +41,8 @@ public class ConfigUtil {
         shouldAutomaticallyRemoveCommands = config.getBoolean("automatically_remove_no_permission_commands");
         shouldFakeNoPermission = config.getBoolean("fake_no_permission_when_using_blacklisted_command");
 
-        bypassPermission = config.getString("permission_bypass_tab_filtering");
-        reloadPermission = config.getString("permission_reload_config");
-        adminPermission = config.getString("permission_admin");
+        BYPASS_PERMISSION = config.getString("permission_bypass_tab_filtering");
+        ADMIN_PERMISSION = config.getString("permission_admin");
 
         PREFIX = config.getString("prefix");
         UPDATE_AVAILABLE = new TextComponent(config.getString("update_is_available"));

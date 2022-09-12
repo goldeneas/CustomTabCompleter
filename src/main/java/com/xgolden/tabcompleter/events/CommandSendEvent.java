@@ -19,7 +19,7 @@ public class CommandSendEvent implements Listener {
     @EventHandler
     public void onCommandSend(PlayerCommandSendEvent event) {
         Player player = event.getPlayer();
-        if(player.hasPermission(ConfigUtil.bypassPermission)) { return; }
+        if(player.hasPermission(ConfigUtil.BYPASS_PERMISSION)) { return; }
 
         Collection<String> commands = event.getCommands();
 

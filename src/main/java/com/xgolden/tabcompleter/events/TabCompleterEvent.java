@@ -1,6 +1,7 @@
 package com.xgolden.tabcompleter.events;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -12,7 +13,9 @@ public class TabCompleterEvent implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
 
-        List<String> firstArgumentList = Arrays.asList("reload", "create", "delete", "add", "remove");
+        // TODO: fix reload command
+        //List<String> firstArgumentList = Arrays.asList("reload", "create", "delete", "add", "remove");
+        List<String> firstArgumentList = Arrays.asList("create", "delete", "add", "remove");
         List<String> commandCreationList = Arrays.asList("<group>");
         List<String> commandManagementList = Arrays.asList("<command> <group>");
 
@@ -29,7 +32,7 @@ public class TabCompleterEvent implements TabCompleter {
                 return commandManagementList;
                 
             default:
-                return null;
+                return Collections.emptyList();
         }
     }
 
