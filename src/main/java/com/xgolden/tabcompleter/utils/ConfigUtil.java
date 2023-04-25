@@ -9,10 +9,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ConfigUtil {
-    
-    // Settings
-    public static boolean shouldAutomaticallyRemoveCommands;
-    public static boolean shouldFakeNoPermission;
 
     // Permissions
     public static String BYPASS_PERMISSION;
@@ -29,6 +25,9 @@ public class ConfigUtil {
     public static TextComponent RELOADED_CONFIG;
     public static TextComponent ADDED_COMMAND;
     public static TextComponent REMOVED_COMMAND;
+    public static TextComponent GROUP_CREATED;
+    public static TextComponent GROUP_DELETED;
+    public static TextComponent COULD_NOT_FIND_GROUP;
 
     static {
         reloadConfig();
@@ -38,10 +37,7 @@ public class ConfigUtil {
         File file = new File(Main.getInstance().getDataFolder().getAbsolutePath() + "/config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
-        shouldAutomaticallyRemoveCommands = config.getBoolean("automatically_remove_no_permission_commands");
-        shouldFakeNoPermission = config.getBoolean("fake_no_permission_when_using_blacklisted_command");
-
-        BYPASS_PERMISSION = config.getString("permission_bypass_tab_filtering");
+        BYPASS_PERMISSION = config.getString("permission_bypass");
         ADMIN_PERMISSION = config.getString("permission_admin");
 
         PREFIX = config.getString("prefix");
@@ -51,15 +47,11 @@ public class ConfigUtil {
         NOT_ENOUGH_PERMISSIONS = new TextComponent(config.getString("not_enough_permissions"));
         UNKNOWN_ARGUMENT = new TextComponent(config.getString("unknown_command_argument"));
         NO_CONSOLE_USAGE = new TextComponent(config.getString("no_usage_from_console"));
-        RELOADED_CONFIG = new TextComponent(config.getString("successfully_reloaded_config"));
-        ADDED_COMMAND = new TextComponent(config.getString("succesfully_added_command_to_list"));
-        REMOVED_COMMAND = new TextComponent(config.getString("succesfully_removed_command_to_list"));
+        RELOADED_CONFIG = new TextComponent(config.getString("config_reloaded"));
+        ADDED_COMMAND = new TextComponent(config.getString("command_added"));
+        REMOVED_COMMAND = new TextComponent(config.getString("command_removed"));
+        GROUP_CREATED = new TextComponent(config.getString("group_created"));
+        GROUP_DELETED = new TextComponent(config.getString("group_deleted"));
+        COULD_NOT_FIND_GROUP = new TextComponent(config.getString("could_not_find_group"));
     }
-
-    public static void set(String path, Object value) {
-        Main plugin = Main.getInstance();
-        plugin.getConfig().set(path, value);
-        plugin.saveConfig();
-    }
-
 }

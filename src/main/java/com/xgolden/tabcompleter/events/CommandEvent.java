@@ -12,98 +12,115 @@ public class CommandEvent implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        if (args.length == 0) {
+        int argsLength = args.length;
+        if(argsLength == 0) {
             ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
             return true;
         }
 
         switch (args[0]) {
-
             case "reload":
-                if (!sender.hasPermission(ConfigUtil.ADMIN_PERMISSION)) {
-                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_PERMISSIONS);
-                    return true;
-                }
-
-                ChatUtil.sendMessage(sender, ConfigUtil.RELOADED_CONFIG);
-                ConfigUtil.reloadConfig();
+                reloadConfig(sender);
                 break;
 
             case "create":
-                if (!sender.hasPermission(ConfigUtil.ADMIN_PERMISSION)) {
-                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_PERMISSIONS);
-                    return true;
-                }
-
-                if (args.length < 2) {
-                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
-                    return true;
-                }
-
-                // We avoid using dots since they will cause another section in the yml file to
-                // be created.
-                // tabcompleter.helper would create a tabcompleter section and under it an helper
-                // one.
-                GroupsUtil.createGroupWithPermission(args[1].replace('.', '_'));
-                ChatUtil.sendMessage(sender,
-                        "Successfully created group with permission: " + args[1].replace('.', '_'));
+                checkArgsLenght(sender, argsLength, 3);
+                createGroup(sender, args[1], args[2]);
                 break;
 
             case "delete":
-                if (!sender.hasPermission(ConfigUtil.ADMIN_PERMISSION)) {
-                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_PERMISSIONS);
-                    return true;
-                }
-
-                if (args.length < 2) {
-                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
-                    return true;
-                }
-
-                GroupsUtil.deleteGroupWithPermission(args[1].replace('.', '_'));
-                ChatUtil.sendMessage(sender,
-                        "Successfully deleted group with permission: " + args[1].replace('.', '_'));
+                checkArgsLenght(sender, argsLength, 2);
+                deleteGroup(sender, args[1]);
                 break;
 
-            case "add":
-                if (!sender.hasPermission(ConfigUtil.ADMIN_PERMISSION)) {
-                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_PERMISSIONS);
-                    return true;
-                }
-
-                if (args.length < 3) {
-                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
-                    return true;
-                }
-
-                // args[1] is the command.
-                // args[2] is the group being targeted.
-                GroupsUtil.addCommandToGroup(args[1], args[2]);
+            case "addCommand":
+                checkArgsLenght(sender, argsLength, 3);
+                addCommand(sender, args[1], args[2]);
                 break;
 
-            case "remove":
-                if (!sender.hasPermission(ConfigUtil.ADMIN_PERMISSION)) {
-                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_PERMISSIONS);
-                    return true;
-                }
-
-                if (args.length < 3) {
-                    ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
-                    return true;
-                }
-
-                // args[1] is the command.
-                // args[2] is the group being targeted.
-                GroupsUtil.removeCommandFromGroup(args[1], args[2]);
+            case "removeCommand":
+                checkArgsLenght(sender, argsLength, 3);
+                removeCommand(sender, args[1], args[2]);
                 break;
 
             default:
-                ChatUtil.sendMessage(sender, ConfigUtil.UNKNOWN_ARGUMENT);
+                unknownCommand(sender);
                 break;
         }
 
         return true;
+    }
+
+    private void reloadConfig(CommandSender sender) {
+        if(!isUserAdmin(sender))
+            return;
+
+        ConfigUtil.reloadConfig();
+        ChatUtil.sendMessage(sender, ConfigUtil.RELOADED_CONFIG);
+    }
+
+    private void createGroup(CommandSender sender, String groupName, String basePermission) {
+        if(!isUserAdmin(sender))
+            return;
+
+        GroupsUtil.createGroup(groupName, basePermission);
+        ChatUtil.sendMessage(sender, ConfigUtil.GROUP_CREATED);
+    }
+
+    private void deleteGroup(CommandSender sender, String groupName) {
+        if(!isUserAdmin(sender) || !doesGroupExist(sender, groupName))
+            return;
+
+        GroupsUtil.deleteGroup(groupName);
+        ChatUtil.sendMessage(sender, ConfigUtil.GROUP_DELETED);
+    }
+
+    private void addCommand(CommandSender sender, String groupName, String command) {
+        if(!isUserAdmin(sender) || !doesGroupExist(sender, groupName))
+            return;
+
+        GroupsUtil.addCommandToGroup(groupName, command);
+        ChatUtil.sendMessage(sender, ConfigUtil.ADDED_COMMAND);
+    }
+
+    private void removeCommand(CommandSender sender, String groupName, String command) {
+        if(!isUserAdmin(sender) || !doesGroupExist(sender, groupName))
+            return;
+
+        GroupsUtil.removeCommandFromGroup(groupName, command);
+        ChatUtil.sendMessage(sender, ConfigUtil.REMOVED_COMMAND);
+    }
+
+    private void unknownCommand(CommandSender sender) {
+        ChatUtil.sendMessage(sender, ConfigUtil.UNKNOWN_ARGUMENT);
+    }
+
+    private boolean isUserAdmin(CommandSender sender){
+        String p = ConfigUtil.ADMIN_PERMISSION;
+        boolean isAdmin = sender.hasPermission(p);
+
+        if(!isAdmin)
+            ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_PERMISSIONS);
+
+        return isAdmin;
+    }
+
+    private boolean checkArgsLenght(CommandSender sender, int argsLenght, int requiredArgsLenght) {
+        boolean isCheckPassed = argsLenght >= requiredArgsLenght;
+
+        if(!isCheckPassed)
+            ChatUtil.sendMessage(sender, ConfigUtil.NOT_ENOUGH_ARGUMENTS);
+
+        return isCheckPassed;
+    }
+
+    private boolean doesGroupExist(CommandSender sender, String groupName) {
+        boolean doesExist = GroupsUtil.doesGroupExist(groupName);
+
+        if(!doesExist)
+            ChatUtil.sendMessage(sender, ConfigUtil.COULD_NOT_FIND_GROUP);
+
+        return doesExist;
     }
 
 }

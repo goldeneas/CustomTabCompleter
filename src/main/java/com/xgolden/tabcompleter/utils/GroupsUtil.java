@@ -16,48 +16,72 @@ public class GroupsUtil extends CustomConfig {
     //     saveConfig();
     // }
 
-    public static void createGroupWithPermission(String permission) {
-        config.set(GROUPS_PATH +"."+ permission +"."+ "is_list_whitelist", false);
-        config.set(GROUPS_PATH +"."+ permission +"."+ "commands", Arrays.asList("default_command", "anothercommand"));
+    public static void createGroup(String groupName, String permission) {
+        // TODO handle this correctly
+        if(isStringNullOrEmpty(groupName) && isStringNullOrEmpty(permission)) {
+            System.out.println("[TABCOMPLETER] COULD NOT CREATE GROUP");
+            return;
+        }
+
+        config.set(GROUPS_PATH +"."+ groupName +"."+ "permission", permission);
+        config.set(GROUPS_PATH +"."+ groupName +"."+ "blacklist", true);
+        config.set(GROUPS_PATH +"."+ groupName +"."+ "commands", Arrays.asList("command", "command2"));
         saveConfig();
     }
 
-    public static void deleteGroupWithPermission(String permission) {
-        config.set(GROUPS_PATH +"."+ permission, null);
+    public static void deleteGroup(String groupName) {
+        config.set(GROUPS_PATH +"."+ groupName, null);
         saveConfig();
     }
 
-    public static void addCommandToGroup(String command, String permission) {
-        List<String> _currentCommands = getCommandsForGroup(permission);
+    public static void addCommandToGroup(String groupName, String command) {
+        List<String> _currentCommands = getCommandsForGroup(groupName);
         _currentCommands.add(command);
 
-        config.set(GROUPS_PATH +"."+ permission +"."+ "commands", _currentCommands);
+        config.set(GROUPS_PATH +"."+ groupName +"."+ "commands", _currentCommands);
         saveConfig();
     }
 
-    public static void removeCommandFromGroup(String command, String permission) {
-        List<String> _currentCommands = getCommandsForGroup(permission);
-        _currentCommands.remove(command);
+    public static void removeCommandFromGroup(String groupName, String command) {
+        List<String> _currentCommands = getCommandsForGroup(command);
+        _currentCommands.remove(groupName);
 
-        config.set(GROUPS_PATH +"."+ permission +"."+ "commands", _currentCommands);
+        config.set(GROUPS_PATH +"."+ command +"."+ "commands", _currentCommands);
         saveConfig();
     }
 
-    public static void setToWhitelist(String permission, boolean bool) {
-        config.set(GROUPS_PATH +"."+ permission +"."+ "is_list_whitelist", bool);
+    public static void setBlacklist(String groupName, boolean b) {
+        config.set(GROUPS_PATH +"."+ groupName +"."+ "blacklist", b);
         saveConfig();
     }
 
-    public static boolean isWhitelist(String permission) {
-        return config.getBoolean(GROUPS_PATH +"."+ permission +"."+ "is_list_whitelist");
+    public static boolean isGroupBlacklist(String groupName) {
+        return config.getBoolean(GROUPS_PATH +"."+ groupName +"."+ "blacklist");
     }
 
-    public static Set<String> getGroups() {
+    public static boolean doesGroupExist(String groupName) {
+        return config.getString(GROUPS_PATH +"."+ groupName +"."+ "permission") != null;
+    }
+
+    // rename this shit
+    public static boolean shouldGroupFakePermission(String groupName, boolean b) {
+        return config.getBoolean(GROUPS_PATH +"."+ groupName +"."+ "fake_no_permission");
+    }
+
+    public static Set<String> getGroupNames() {
         return config.getConfigurationSection(GROUPS_PATH).getKeys(false);
     }
 
-    public static List<String> getCommandsForGroup(String permission) {
-        return config.getStringList(GROUPS_PATH +"."+ permission +"."+ "commands");
+    public static String getPermissionForGroup(String groupName) {
+        return config.getString(GROUPS_PATH +"."+ groupName +"."+ "permission");
+    }
+
+    public static List<String> getCommandsForGroup(String groupName) {
+        return config.getStringList(GROUPS_PATH +"."+ groupName +"."+ "commands");
+    }
+
+    private static boolean isStringNullOrEmpty(String s) {
+        return (s == null || s.trim().isEmpty());
     }
 
 }

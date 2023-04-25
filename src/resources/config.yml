@@ -1,9 +1,5 @@
-permission_bypass_tab_filtering: "tabcompleter.bypass"
-permission_reload_config: "tabcompleter.reload"
+permission_bypass: "tabcompleter.bypass"
 permission_admin: "tabcompleter.admin"
-
-fake_no_permission_when_using_blacklisted_command: true
-automatically_remove_no_permission_commands: true
 
 prefix: "&6TabCompleter »&7"
 update_is_available: "A new update is available! Please download it on spigot."
@@ -12,6 +8,9 @@ not_enough_permissions: "You don't have enough permissions to use this command!"
 not_enough_arguments: "Not enough arguments."
 no_usage_from_console: "You cannot use this command from console!"
 unknown_command_argument: "Unknown argument, please try again."
-successfully_reloaded_config: "The configuration has been reloaded."
-succesfully_added_command_to_list: "Your command has been successfully added."
-succesfully_removed_command_to_list: "Your command has been successfully removed."
+config_reloaded: "The configuration has been reloaded."
+command_added: "Your command has been added successfully."
+command_removed: "Your command has been removed successfully."
+group_created: "Your group has been created successfully."
+group_deleted: "Your group has been deleted successfully."
+could_not_find_group: "The group you specified could not be found."

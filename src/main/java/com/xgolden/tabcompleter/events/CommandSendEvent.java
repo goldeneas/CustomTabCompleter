@@ -19,34 +19,22 @@ public class CommandSendEvent implements Listener {
     @EventHandler
     public void onCommandSend(PlayerCommandSendEvent event) {
         Player player = event.getPlayer();
-        if(player.hasPermission(ConfigUtil.BYPASS_PERMISSION)) { return; }
+        if(player.hasPermission(ConfigUtil.BYPASS_PERMISSION))
+            return;
 
         Collection<String> commands = event.getCommands();
 
-        for(String groupPermission : GroupsUtil.getGroups()) {
+        for(String group : GroupsUtil.getGroupNames()) {
+            String groupPermission = GroupsUtil.getPermissionForGroup(group);
+
             if(player.hasPermission(groupPermission)) {
-                boolean isWhitelist = GroupsUtil.isWhitelist(groupPermission);
-                List<String> _groupCommandsList = GroupsUtil.getCommandsForGroup(groupPermission);
+                boolean isBlacklist = GroupsUtil.isGroupBlacklist(group);
+                List<String> groupCommands = GroupsUtil.getCommandsForGroup(group);
 
-                if(isWhitelist) {
-                    commands.retainAll(_groupCommandsList);
+                if(isBlacklist) {
+                    commands.removeAll(groupCommands);
                 } else {
-                    commands.removeAll(_groupCommandsList);
-                }
-            }
-        }
-        
-        // We have to use an iterator in order to prevent a concurrent modificatione exception.
-        // This section check if an user has the permissions required to execute a command
-        // and if he doesn't, the commands are automatically removed from the completition list.
-        if(ConfigUtil.shouldAutomaticallyRemoveCommands) {
-            for(Iterator<String> iterator = commands.iterator(); iterator.hasNext();) {
-                String commandName = iterator.next();
-                PluginCommand c = Bukkit.getPluginCommand(commandName);
-
-                if(c != null && c.testPermissionSilent(player)) {
-                    // If user doesn't have permission
-                    iterator.remove();
+                    commands.retainAll(groupCommands);
                 }
             }
         }

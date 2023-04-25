@@ -14,22 +14,21 @@ public class TabCompleterEvent implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
 
         // TODO: fix reload command
-        //List<String> firstArgumentList = Arrays.asList("reload", "create", "delete", "add", "remove");
-        List<String> firstArgumentList = Arrays.asList("create", "delete", "add", "remove");
-        List<String> commandCreationList = Arrays.asList("<group>");
-        List<String> commandManagementList = Arrays.asList("<command> <group>");
+        List<String> noneOptions = Arrays.asList("create", "delete", "addCommand", "removeCommand");
+        List<String> groupOptions = Arrays.asList("<group>");
+        List<String> commandOptions = Arrays.asList("<group> <command>");
 
         switch(args[0]) {
             case "":
-                return firstArgumentList;
+                return noneOptions;
 
             case "create":
             case "delete":
-                return commandCreationList;
+                return groupOptions;
 
-            case "add":
-            case "remove":
-                return commandManagementList;
+            case "addCommand":
+            case "removeCommand":
+                return commandOptions;
                 
             default:
                 return Collections.emptyList();

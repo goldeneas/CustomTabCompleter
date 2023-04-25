@@ -1,9 +1,8 @@
 groups:
-  permission_group_one:
-    is_list_whitelist: false
+  groupName:
+    permission: "ctc.admin"
+    blacklist: true
+    fake_no_permission: true
     commands:
-    - icanhasbukkit
-    - plugins
-    - pl
-    - bukkit:?
-    - bukkit:help
+      - command
+      - command2
