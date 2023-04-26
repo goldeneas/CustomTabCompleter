@@ -28,6 +28,7 @@ public class ConfigUtil {
     public static TextComponent GROUP_CREATED;
     public static TextComponent GROUP_DELETED;
     public static TextComponent COULD_NOT_FIND_GROUP;
+    public static TextComponent COULD_NOT_CREATE_GROUP;
 
     static {
         reloadConfig();
@@ -53,5 +54,6 @@ public class ConfigUtil {
         GROUP_CREATED = new TextComponent(config.getString("group_created"));
         GROUP_DELETED = new TextComponent(config.getString("group_deleted"));
         COULD_NOT_FIND_GROUP = new TextComponent(config.getString("could_not_find_group"));
+        COULD_NOT_CREATE_GROUP = new TextComponent(config.getString("could_not_create_group"));
     }
 }

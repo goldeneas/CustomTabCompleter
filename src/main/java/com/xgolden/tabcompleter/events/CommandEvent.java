@@ -24,22 +24,26 @@ public class CommandEvent implements CommandExecutor {
                 break;
 
             case "create":
-                checkArgsLenght(sender, argsLength, 3);
+                if(!checkArgsLenght(sender, argsLength, 3))
+                    return true;
                 createGroup(sender, args[1], args[2]);
                 break;
 
             case "delete":
-                checkArgsLenght(sender, argsLength, 2);
+                if(!checkArgsLenght(sender, argsLength, 2))
+                    return true;
                 deleteGroup(sender, args[1]);
                 break;
 
             case "addCommand":
-                checkArgsLenght(sender, argsLength, 3);
+                if(!checkArgsLenght(sender, argsLength, 3))
+                    return true;
                 addCommand(sender, args[1], args[2]);
                 break;
 
             case "removeCommand":
-                checkArgsLenght(sender, argsLength, 3);
+                if(!checkArgsLenght(sender, argsLength, 3))
+                    return true;
                 removeCommand(sender, args[1], args[2]);
                 break;
 
@@ -56,6 +60,7 @@ public class CommandEvent implements CommandExecutor {
             return;
 
         ConfigUtil.reloadConfig();
+        GroupsUtil.reloadConfig();
         ChatUtil.sendMessage(sender, ConfigUtil.RELOADED_CONFIG);
     }
 
@@ -63,7 +68,10 @@ public class CommandEvent implements CommandExecutor {
         if(!isUserAdmin(sender))
             return;
 
-        GroupsUtil.createGroup(groupName, basePermission);
+        if(!GroupsUtil.createGroup(groupName, basePermission)) {
+            ChatUtil.sendMessage(sender, ConfigUtil.COULD_NOT_CREATE_GROUP);
+        }
+
         ChatUtil.sendMessage(sender, ConfigUtil.GROUP_CREATED);
     }
 

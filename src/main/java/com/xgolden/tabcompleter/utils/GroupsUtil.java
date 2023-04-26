@@ -4,29 +4,27 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import com.xgolden.tabcompleter.Main;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class GroupsUtil extends CustomConfig {
 
     private static final String GROUPS_PATH = "groups";
 
+    private static Main instance = Main.getInstance();
     private static FileConfiguration config = getCustomConfig("groups.yml");
 
-    // static {
-    //     saveConfig();
-    // }
-
-    public static void createGroup(String groupName, String permission) {
-        // TODO handle this correctly
-        if(isStringNullOrEmpty(groupName) && isStringNullOrEmpty(permission)) {
-            System.out.println("[TABCOMPLETER] COULD NOT CREATE GROUP");
-            return;
-        }
+    public static boolean createGroup(String groupName, String permission) {
+        if(isStringNullOrEmpty(groupName) && isStringNullOrEmpty(permission))
+            return false;
 
         config.set(GROUPS_PATH +"."+ groupName +"."+ "permission", permission);
         config.set(GROUPS_PATH +"."+ groupName +"."+ "blacklist", true);
+        config.set(GROUPS_PATH +"."+ groupName +"."+ "fake_no_permission", true);
         config.set(GROUPS_PATH +"."+ groupName +"."+ "commands", Arrays.asList("command", "command2"));
         saveConfig();
+
+        return true;
     }
 
     public static void deleteGroup(String groupName) {
@@ -63,7 +61,6 @@ public class GroupsUtil extends CustomConfig {
         return config.getString(GROUPS_PATH +"."+ groupName +"."+ "permission") != null;
     }
 
-    // rename this shit
     public static boolean shouldGroupFakePermission(String groupName, boolean b) {
         return config.getBoolean(GROUPS_PATH +"."+ groupName +"."+ "fake_no_permission");
     }
@@ -82,6 +79,10 @@ public class GroupsUtil extends CustomConfig {
 
     private static boolean isStringNullOrEmpty(String s) {
         return (s == null || s.trim().isEmpty());
+    }
+
+    public static void reloadConfig() {
+        config = getCustomConfig("groups.yml");
     }
 
 }

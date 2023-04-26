@@ -17,7 +17,7 @@ public class UpdateUtil {
 
     public static void check() {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=96184&t=" + System.currentTimeMillis()).openStream(); Scanner scanner = new Scanner(inputStream)) {
+            try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=96184").openStream(); Scanner scanner = new Scanner(inputStream)) {
                 if (scanner.hasNext()) {
                     String currentVersion = plugin.getDescription().getVersion();
                     String newestVersion = scanner.next();

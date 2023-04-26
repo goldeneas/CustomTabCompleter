@@ -1,9 +1,9 @@
 main: com.xgolden.tabcompleter.Main
 name: CustomTabCompleter
-version: '1.2'
+version: '1.2.1'
 author: xGolden_
 commands:
    tabcompleter:
       description: CustomTabCompleter's main command.
       usage: /<command>
-      aliases: [tc, tabc, tcompleter]
+      aliases: [ctc, tc, tabc, tcompleter]

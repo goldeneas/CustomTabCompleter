@@ -18,7 +18,7 @@ public class CommandPreProcessEvent implements Listener {
         Player player = event.getPlayer();
         // We need to use substring to remove the forward slash from the command.
         String eventMessage = event.getMessage();
-        String commandName = eventMessage.substring(1, eventMessage.indexOf(" ")).toLowerCase();
+        String commandName = eventMessage.substring(1).toLowerCase();
 
         for(String group : GroupsUtil.getGroupNames()) {
             List<String> commands = GroupsUtil.getCommandsForGroup(group);
@@ -26,7 +26,7 @@ public class CommandPreProcessEvent implements Listener {
 
             if(isBlacklist && commands.contains(commandName)
             || (!isBlacklist && !commands.contains(commandName))) {
-                ChatUtil.sendMessage(player, ConfigUtil.FAKE_NO_PERMISSION);
+                player.sendMessage(ConfigUtil.FAKE_NO_PERMISSION.getString());
                 event.setCancelled(true);
                 break;
             }

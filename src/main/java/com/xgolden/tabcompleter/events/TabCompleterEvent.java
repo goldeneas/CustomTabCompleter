@@ -12,10 +12,7 @@ public class TabCompleterEvent implements TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-
-        // TODO: fix reload command
-        List<String> noneOptions = Arrays.asList("create", "delete", "addCommand", "removeCommand");
-        List<String> groupOptions = Arrays.asList("<group>");
+        List<String> noneOptions = Arrays.asList("create", "delete", "addCommand", "removeCommand", "reload");
         List<String> commandOptions = Arrays.asList("<group> <command>");
 
         switch(args[0]) {
@@ -23,8 +20,10 @@ public class TabCompleterEvent implements TabCompleter {
                 return noneOptions;
 
             case "create":
+                return Arrays.asList("<name> <permission>");
+
             case "delete":
-                return groupOptions;
+                return Arrays.asList("<group>");
 
             case "addCommand":
             case "removeCommand":
